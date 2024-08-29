@@ -1,0 +1,6914 @@
+{
+  "info": {
+    "title": "SoluM API Documentation",
+    "description": "Portal APIs",
+    "contact": {
+      "name": "See more at SoluM - Website",
+      "url": "https://solumesl.com/"
+    },
+    "version": "4.7.0.RELEASE(506d4bd)"
+  },
+  "security": [
+    {
+      "api-key": []
+    }
+  ],
+  "paths": {
+    "/labels/contents/regenerateimage": {
+      "put": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Regenerate images for all devices and push them",
+        "operationId": "updateImageForcely",
+        "parameters": [
+          {
+            "name": "targetPage",
+            "in": "query",
+            "description": "Target page to be updated",
+            "required": false,
+            "format": "int32",
+            "default": 1,
+            "type": "integer"
+          },
+          {
+            "name": "scheduleInfo",
+            "in": "query",
+            "description": "Reserve time",
+            "required": false,
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "name": "skipChecksumValidation",
+            "in": "query",
+            "description": "Reserve time",
+            "required": false,
+            "default": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter is invalid"
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/contents/led/pattern": {
+      "get": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Get LED pattern list.",
+        "operationId": "getLedPatterns",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LedPattern"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "parameters": [],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ]
+      },
+      "put": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Modify LED pattern.",
+        "operationId": "updateLedPatterns",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LedPattern"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LedPattern"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/contents/led/multiple": {
+      "put": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Blink label's LED for Multiple Device",
+        "operationId": "controlLedmultiple",
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter is invalid"
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ControlLedforMultipleParam"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/contents/led/article": {
+      "put": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Blink label's LED based on a article.",
+        "operationId": "controlLedByArticle",
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "206": {
+            "description": "Some articles are not acceptable.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter is invalid"
+          },
+          "406": {
+            "description": "All articles are not acceptable.",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ControlLedByArticleParam"
+              }
+            }
+          }
+        ],
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/contents/led": {
+      "put": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Blink label's LED",
+        "operationId": "controlLed",
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter is invalid"
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ControlLedParam"
+              }
+            }
+          }
+        ],
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/alive": {
+      "put": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Check label alive",
+        "operationId": "checkTagAlive",
+        "parameters": [
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "default": "",
+            "type": "string"
+          },
+          {
+            "name": "aliveInterval",
+            "in": "query",
+            "required": false,
+            "format": "int32",
+            "default": 3,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter is invalid"
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/articles/field/{stationCode}": {
+      "put": {
+        "tags": [
+          "Article"
+        ],
+        "summary": "Update Specific field of assigned article",
+        "operationId": "updateArticleBySpecificField",
+        "parameters": [
+          {
+            "name": "stationCode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "field",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "value",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter is invalid"
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/tapandgo": {
+      "post": {
+        "tags": [
+          "Tap And Go"
+        ],
+        "summary": "Update infomation",
+        "operationId": "postInfo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "402": {
+            "description": "License is expired"
+          },
+          "405": {
+            "description": "Parameter is invalid"
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TapAndGoInfoPostRequestParam"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/labels/unlink": {
+      "post": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Unlink article and label",
+        "operationId": "unassignOneByOne",
+        "parameters": [
+          {
+            "name": "labelCode",
+            "in": "query",
+            "required": true,
+            "minLength": 1,
+            "maxLength": 2147483647,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "402": {
+            "description": "License is expired"
+          },
+          "404": {
+            "description": "No-assigned label code",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter is invalid"
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/link/{stationCode}": {
+      "post": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Link Product to label",
+        "operationId": "assignOneByOne",
+        "parameters": [
+          {
+            "name": "stationCode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AssignRequestMessage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "402": {
+            "description": "License is expired"
+          },
+          "404": {
+            "description": "It can't find a resource to link operation",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter is invalid"
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/link/multiple/{stationCode}": {
+      "post": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Link Product to label(multiple)",
+        "operationId": "assignMultiple",
+        "parameters": [
+          {
+            "name": "stationCode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AssignMultipleRequestMessage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "402": {
+            "description": "License is expired"
+          },
+          "404": {
+            "description": "It can't find a resource to link operation",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter is invalid"
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/link/article/{stationCode}": {
+      "post": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Link label with article info",
+        "operationId": "assignWithArticle",
+        "parameters": [
+          {
+            "name": "stationCode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AssignArticleRequestMessage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "402": {
+            "description": "License is expired"
+          },
+          "404": {
+            "description": "It can't find a resource to link operation",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter is invalid"
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/contents/segment/makePreviewImage": {
+      "post": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "create Preview Image for Segment",
+        "operationId": "makeTemplate",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReturnResponse"
+            }
+          },
+          "402": {
+            "description": "License is expired"
+          },
+          "404": {
+            "description": "It can't find a resource to link operation",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter is invalid"
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SegmentContentParam"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/contents/schedule/article": {
+      "get": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Get schedule information about a specific article",
+        "operationId": "getScheduleByArticle",
+        "parameters": [
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "default": "DEFAULT_STATION_CODE",
+            "type": "string"
+          },
+          {
+            "name": "articleId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArticleScheduleResponse"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Can't find article infomation.",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      },
+      "post": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Register/Update flipping page schedule of label by article",
+        "operationId": "updateScheduleByArticle",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ArticleScheduleParam"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Cancle a article's flipping schedule",
+        "operationId": "deleteScheduleByArticle",
+        "parameters": [
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "default": "DEFAULT_STATION_CODE",
+            "type": "string"
+          },
+          {
+            "name": "articleId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Can't find article infomation.",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/contents/schedule": {
+      "post": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Register/Update flipping page schedule of label",
+        "operationId": "updateTagScheduleInfo",
+        "responses": {
+          "206": {
+            "description": "Success to set Tag-Scheduling partially.",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "402": {
+            "description": "License is expired"
+          },
+          "404": {
+            "description": "No target label",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter is invalid"
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TagScheduleParam"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/contents/repeatSchedule": {
+      "post": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Register/Update flipping page schedule of label",
+        "operationId": "updateTagRepeatScheduleInfo",
+        "responses": {
+          "206": {
+            "description": "Success to set Tag-Scheduling partially.",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "402": {
+            "description": "License is expired"
+          },
+          "404": {
+            "description": "No target label",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter is invalid"
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TagScheduleParam"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/contents/page": {
+      "post": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Change front-end page of label",
+        "operationId": "changeDisplayPage",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "402": {
+            "description": "License is expired"
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter is invalid"
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateDisplayPage"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/contents/nfc": {
+      "post": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Push the nfc URL data to labels",
+        "operationId": "updateNfcUrl",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "402": {
+            "description": "License is expired"
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter is invalid"
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateNfcUrl"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/contents/image": {
+      "post": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Push the image data to labels",
+        "operationId": "updateImage",
+        "parameters": [
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateImage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "402": {
+            "description": "License is expired"
+          },
+          "404": {
+            "description": "It can't find a resource for Image-update operation.",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter is invalid"
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/articles/mappingInfo": {
+      "get": {
+        "tags": [
+          "Article"
+        ],
+        "summary": "Get article mapping infomation",
+        "operationId": "getArticleMappingInfo",
+        "parameters": [
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "searchKey",
+            "in": "query",
+            "required": true,
+            "enum": [
+              "ARTICLE_ID",
+              "EAN"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "value",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArticleMappingData"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      },
+      "post": {
+        "tags": [
+          "Article"
+        ],
+        "summary": "Update article mapping infomation",
+        "operationId": "updateArticleMapping",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ArticleMappingParam"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/articles": {
+      "get": {
+        "tags": [
+          "Article"
+        ],
+        "summary": "Get all articles information",
+        "operationId": "getArticleInfo",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Zero-based page index (0..N)",
+            "required": false,
+            "minimum": 0,
+            "default": 0,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "The size of the page to be returned",
+            "required": false,
+            "minimum": 1,
+            "default": 20,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "default": [
+              "id,ASC"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "default": "DEFAULT_STATION_CODE",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      },
+      "post": {
+        "tags": [
+          "Article"
+        ],
+        "summary": "Update article infomation",
+        "operationId": "updateArticle",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ArticleParam"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/accesspoints/{ipAddress}": {
+      "get": {
+        "tags": [
+          "Accesspoint"
+        ],
+        "summary": "Get information about a specific accessPoint",
+        "operationId": "getAccessPointByIPAddress",
+        "parameters": [
+          {
+            "name": "ipAddress",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessPointParam_AccessPointView"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter may be invaild or missed.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Accesspoint"
+        ],
+        "summary": "Reboot a accessPoint",
+        "operationId": "resetAccessPoint",
+        "parameters": [
+          {
+            "name": "ipAddress",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "No target at the URL.",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Invalid Parameter",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/accesspoints/code/{code}": {
+      "get": {
+        "tags": [
+          "Accesspoint"
+        ],
+        "summary": "Get information about a specific accessPoint",
+        "operationId": "getAccessPointByIPAddress_1",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessPointParam_AccessPointView"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Accesspoint"
+        ],
+        "summary": "Reboot a accessPoint",
+        "operationId": "resetAccessPoint_1",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "No target at the URL.",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Invalid Parameter",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/tapandgo/{userId}": {
+      "get": {
+        "tags": [
+          "Tap And Go"
+        ],
+        "summary": "Get all User information",
+        "operationId": "getInfo",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Tap And Go"
+        ],
+        "summary": "Delete User information",
+        "operationId": "deleteInfo",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/stations": {
+      "get": {
+        "tags": [
+          "Station"
+        ],
+        "summary": "Get information about branches - ex. Station, Store",
+        "operationId": "getStores",
+        "parameters": [
+          {
+            "name": "accessPoints",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StationParam_StationView"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/stations/{stationCode}": {
+      "get": {
+        "tags": [
+          "Station"
+        ],
+        "summary": "Get information about branches - ex. Station, Store",
+        "operationId": "getStore",
+        "parameters": [
+          {
+            "name": "stationCode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accessPoints",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StationParam_StationView"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/stations/{stationCode}/whiteList": {
+      "get": {
+        "tags": [
+          "Station"
+        ],
+        "summary": "Get information about the WhiteList",
+        "operationId": "getWhiteList",
+        "parameters": [
+          {
+            "name": "stationCode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StationWhiteListParam_WhistListView"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/stations/dashboard": {
+      "get": {
+        "tags": [
+          "Station"
+        ],
+        "summary": "Get information about branches - ex. Station, Store",
+        "operationId": "getStoresForDashboard",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StationParam_StationViewDashbaord"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "parameters": [],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/picking/station/{stationCode}": {
+      "get": {
+        "tags": [
+          "Picking System"
+        ],
+        "summary": "Get the picking list by station(with pageable)",
+        "operationId": "getByStation",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Zero-based page index (0..N)",
+            "required": false,
+            "minimum": 0,
+            "default": 0,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "The size of the page to be returned",
+            "required": false,
+            "minimum": 1,
+            "default": 20,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "default": [
+              "code,ASC"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "stationCode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PickingRes_PickingView"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/picking/label/{labelCode}": {
+      "get": {
+        "tags": [
+          "Picking System"
+        ],
+        "summary": "Get the picking info by label",
+        "operationId": "getByLabel",
+        "parameters": [
+          {
+            "name": "labelCode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PickingRes_PickingView"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/picking": {
+      "get": {
+        "tags": [
+          "Picking System"
+        ],
+        "summary": "Get the picking list(with pageable)",
+        "operationId": "getPageable",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Zero-based page index (0..N)",
+            "required": false,
+            "minimum": 0,
+            "default": 0,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "The size of the page to be returned",
+            "required": false,
+            "minimum": 1,
+            "default": 20,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "default": [
+              "code,ASC"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PickingRes_PickingView"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels": {
+      "get": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Get information about label",
+        "operationId": "getEPaperTags",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Zero-based page index (0..N)",
+            "required": false,
+            "minimum": 0,
+            "default": 0,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "The size of the page to be returned",
+            "required": false,
+            "minimum": 1,
+            "default": 20,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "default": [
+              "code,ASC"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "enum": [
+              "PROCESSING",
+              "TIMEOUT",
+              "SUCCESS",
+              "UNASSIGNED"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "aliveInterval",
+            "in": "query",
+            "required": false,
+            "format": "int32",
+            "default": 0,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/{labelCode}": {
+      "get": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Get information about a specific label by code",
+        "operationId": "getEPaperTagByLabelCode",
+        "parameters": [
+          {
+            "name": "labelCode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "contents",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "aliveInterval",
+            "in": "query",
+            "required": false,
+            "format": "int32",
+            "default": 0,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Label code is invaild",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Delete label information",
+        "operationId": "deleteLabelInfo",
+        "parameters": [
+          {
+            "name": "labelCode",
+            "in": "path",
+            "description": "Label Code",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "No-assigned label code",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Label code is invaild",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/detail/{labelCode}": {
+      "get": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Get information about a specific label by code",
+        "operationId": "getEPaperTagByLabelCode_1",
+        "parameters": [
+          {
+            "name": "labelCode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "contents",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "aliveInterval",
+            "in": "query",
+            "required": false,
+            "format": "int32",
+            "default": 0,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Label code is invaild",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/updateTime": {
+      "get": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Get label list by update time",
+        "operationId": "checkTagAliveUpdateTime",
+        "parameters": [
+          {
+            "name": "updateTime",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Zero-based page index (0..N)",
+            "required": false,
+            "minimum": 0,
+            "default": 0,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "The size of the page to be returned",
+            "required": false,
+            "minimum": 1,
+            "default": 20,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "default": [
+              "code,ASC"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "aliveInterval",
+            "in": "query",
+            "required": false,
+            "format": "int32",
+            "default": 0,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter value is invalid.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/type": {
+      "get": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Get label's attribute ",
+        "operationId": "getSLabelTypeByCode",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PortalSLabelType"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/summary": {
+      "get": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Get summary of labels status.",
+        "operationId": "getTagStatusSummary",
+        "parameters": [
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "accessPointIP",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EPaperTagStatusSummaryParam"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "It can't find a Access Point by IP.",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter value is invalid.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/signal": {
+      "get": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Get label list by signal strength(Exellent, Good, Bad)",
+        "operationId": "getEPaperTagsBySignalStrength",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Zero-based page index (0..N)",
+            "required": false,
+            "minimum": 0,
+            "default": 0,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "The size of the page to be returned",
+            "required": false,
+            "minimum": 1,
+            "default": 20,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "default": [
+              "code,ASC"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "strength",
+            "in": "query",
+            "required": true,
+            "enum": [
+              "EXCELLENT",
+              "GOOD",
+              "BAD"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "aliveInterval",
+            "in": "query",
+            "required": false,
+            "format": "int32",
+            "default": 0,
+            "type": "integer"
+          },
+          {
+            "name": "aliveStatusDisabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EPaperParam_EndDeviceView"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter value is invalid.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/like/labelCode": {
+      "get": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Get EPaper Tags information assigned by \"like labelCode\"",
+        "operationId": "getEPaperTagByLikeLabelCode",
+        "parameters": [
+          {
+            "name": "labelCode",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "contents",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "aliveInterval",
+            "in": "query",
+            "required": false,
+            "format": "int32",
+            "default": 0,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EPaperParam_EndDeviceView"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Label-Code is invaild.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/like/articleId": {
+      "get": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Get EPaper Tags information assigned by \"like articleId\"",
+        "operationId": "getEnddeviceByLikeArticleId",
+        "parameters": [
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "default": "DEFAULT_STATION_CODE",
+            "type": "string"
+          },
+          {
+            "name": "articleId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "aliveInterval",
+            "in": "query",
+            "required": false,
+            "format": "int32",
+            "default": 0,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "A parameter value may be missed or invalid.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/contents/schedule/{labelCode}": {
+      "get": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Get schedule information about a specific label by labelCode",
+        "operationId": "getTagScheduleByLabelCode",
+        "parameters": [
+          {
+            "name": "labelCode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TagScheduleRetrieveParam"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Can't find label infomation.",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Cancle a label's flipping schedule",
+        "operationId": "deleteTagScheduleInfo",
+        "parameters": [
+          {
+            "name": "labelCode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Can't find label infomation.",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "labelCode is invaild.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/contents/repeatSchedule/{labelCode}": {
+      "get": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Get repeat schedule information about a specific label by labelCode",
+        "operationId": "getRepeatTagScheduleByLabelCode",
+        "parameters": [
+          {
+            "name": "labelCode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TagRepeatScheduleRetrieveParam"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Can't find label infomation.",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/contents/led/pattern/{id}": {
+      "get": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Get LED pattern by ID.",
+        "operationId": "getLedPattern",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LedPattern"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/contents/alarm/detail": {
+      "get": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Get Detail Alarm List",
+        "operationId": "getDetailAlarmList",
+        "parameters": [
+          {
+            "name": "clear",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean"
+          },
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ButtonDetailAlarmRsp"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/contents/alarm": {
+      "get": {
+        "tags": [
+          "ESL Content"
+        ],
+        "summary": "Get Alarm List",
+        "operationId": "getAlarmList",
+        "parameters": [
+          {
+            "name": "clear",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean"
+          },
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ButtonAlarmRsp"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/battery": {
+      "get": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Get label list by battery status(Good or Bad)",
+        "operationId": "getEPaperTagsByBatteryStatus",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Zero-based page index (0..N)",
+            "required": false,
+            "minimum": 0,
+            "default": 0,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "The size of the page to be returned",
+            "required": false,
+            "minimum": 1,
+            "default": 20,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "default": [
+              "code,ASC"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": true,
+            "enum": [
+              "VERYGOOD",
+              "GOOD",
+              "LOW",
+              "BAD",
+              "REPLACE"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "aliveInterval",
+            "in": "query",
+            "required": false,
+            "format": "int32",
+            "default": 0,
+            "type": "integer"
+          },
+          {
+            "name": "aliveStatusEnabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EPaperParam_EndDeviceView"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter value is invalid.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/article/name": {
+      "get": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Get EPaper Tag information assigned by a product",
+        "operationId": "getEnddeviceByArticleName",
+        "parameters": [
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "default": "DEFAULT_STATION_CODE",
+            "type": "string"
+          },
+          {
+            "name": "articleName",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "aliveInterval",
+            "in": "query",
+            "required": false,
+            "format": "int32",
+            "default": 0,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EPaperParam_EndDeviceView"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "It can't find an article using this articleId.",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "A parameter value may be missed or invalid.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/article": {
+      "get": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Get label information assigned by a product",
+        "operationId": "getEPaperTagByArticleId",
+        "parameters": [
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "default": "DEFAULT_STATION_CODE",
+            "type": "string"
+          },
+          {
+            "name": "articleId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "contents",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "aliveInterval",
+            "in": "query",
+            "required": false,
+            "format": "int32",
+            "default": 0,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EPaperParam_EndDeviceView"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "It can't find an article using this articleId.",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "A parameter value may be missed or invalid.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/labels/accesspoint/{code}": {
+      "get": {
+        "tags": [
+          "ESL"
+        ],
+        "summary": "Get label list linked to a specific accessPoint",
+        "operationId": "getEPaperTagsByIpOrCode",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Zero-based page index (0..N)",
+            "required": false,
+            "minimum": 0,
+            "default": 0,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "The size of the page to be returned",
+            "required": false,
+            "minimum": 1,
+            "default": 20,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "default": [
+              "code,ASC"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Access Point IP or Code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "enum": [
+              "PROCESSING",
+              "TIMEOUT",
+              "SUCCESS",
+              "UNASSIGNED"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "aliveInterval",
+            "in": "query",
+            "required": false,
+            "format": "int32",
+            "default": 0,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EPaperParam_EndDeviceView"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "There is no Access Point at the IP ",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Parameter value is invalid.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/articles/{articleId}": {
+      "get": {
+        "tags": [
+          "Article"
+        ],
+        "summary": "Get article information by the aritcle id",
+        "operationId": "getArticle",
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "default": "DEFAULT_STATION_CODE",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Article"
+        ],
+        "summary": "Remove article information.",
+        "operationId": "deleteArticle",
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "default": "DEFAULT_STATION_CODE",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/articles/label/{labelCode}": {
+      "get": {
+        "tags": [
+          "Article"
+        ],
+        "summary": "Get article information by label",
+        "operationId": "getArticleByAssignedLabelTwo",
+        "parameters": [
+          {
+            "name": "labelCode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Can't find ESL label",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Invalid Parameter : 'labelCode(using this labelCode)'",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/articles/idNSecondly": {
+      "get": {
+        "tags": [
+          "Article"
+        ],
+        "summary": "Get article information by the specific field value and article id",
+        "operationId": "getArticleByIdNSecondly",
+        "parameters": [
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "default": "DEFAULT_STATION_CODE",
+            "type": "string"
+          },
+          {
+            "name": "articleId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AimsPortalArticleMessage_ArticeView"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/articles/article/content": {
+      "get": {
+        "tags": [
+          "Article"
+        ],
+        "summary": "Get article information by the specific field value",
+        "operationId": "getArticleContent",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Zero-based page index (0..N)",
+            "required": false,
+            "minimum": 0,
+            "default": 0,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "The size of the page to be returned",
+            "required": false,
+            "minimum": 1,
+            "default": 20,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "default": [
+              "id,ASC"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "default": "DEFAULT_STATION_CODE",
+            "type": "string"
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "value",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AimsPortalArticleMessage_ArticeView"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/articles/article": {
+      "get": {
+        "tags": [
+          "Article"
+        ],
+        "summary": "Get article information by the article id including special character",
+        "operationId": "getArticleIncludSpecialCharacter",
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "default": "DEFAULT_STATION_CODE",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AimsPortalArticleMessage_ArticeView"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Article"
+        ],
+        "summary": "Remove article information by the article id including special character",
+        "operationId": "deleteArticleIncludSpecialCharacter",
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "default": "DEFAULT_STATION_CODE",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    },
+    "/accesspoints": {
+      "get": {
+        "tags": [
+          "Accesspoint"
+        ],
+        "summary": "Get information about accessPoint list",
+        "operationId": "getAccessPoints",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Zero-based page index (0..N)",
+            "required": false,
+            "minimum": 0,
+            "default": 0,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "The size of the page to be returned",
+            "required": false,
+            "minimum": 1,
+            "default": 1000,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "default": [
+              "ipAddress,ASC"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "stationCode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "enum": [
+              "DISCONNECTED",
+              "CONNECTED",
+              "NOT_READY",
+              "UNREGISTERED"
+            ],
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AccessPointParam_AccessPointView"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation Succeeded. But There is no content."
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {}
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/AimsApiResponse"
+            }
+          },
+          "500": {
+            "description": "Fail to retrieve requested information."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ]
+      }
+    }
+  },
+  "swagger": "2.0",
+  "host": "localhost:9004",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "definitions": {
+    "AccessPointParam_AccessPointView": {
+      "type": "object",
+      "properties": {
+        "lastModifiedDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "code": {
+          "type": "string"
+        },
+        "macAddress": {
+          "type": "string"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "DISCONNECTED",
+            "CONNECTED",
+            "NOT_READY",
+            "UNREGISTERED"
+          ]
+        },
+        "lastConnectionDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "station": {
+          "$ref": "#/definitions/StationParam_AccessPointView"
+        },
+        "sGatewayStatus": {
+          "$ref": "#/definitions/SGatewayState_AccessPointView"
+        },
+        "sGatewayConfig": {
+          "$ref": "#/definitions/SGatewayConfig_AccessPointView"
+        },
+        "uriScheme": {
+          "type": "string",
+          "enum": [
+            "HTTP",
+            "HTTPS"
+          ]
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "groupId": {
+          "type": "string"
+        },
+        "endDevicesCountByState": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "firmwareVersion": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      }
+    },
+    "AccessPointParam_EndDeviceView": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "code": {
+          "type": "string"
+        },
+        "macAddress": {
+          "type": "string"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "DISCONNECTED",
+            "CONNECTED",
+            "NOT_READY",
+            "UNREGISTERED"
+          ]
+        },
+        "lastConnectionDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "uriScheme": {
+          "type": "string",
+          "enum": [
+            "HTTP",
+            "HTTPS"
+          ]
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "groupId": {
+          "type": "string"
+        },
+        "endDevicesCountByState": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "firmwareVersion": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      }
+    },
+    "AccessPointParam_StationView": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "code": {
+          "type": "string"
+        },
+        "macAddress": {
+          "type": "string"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "DISCONNECTED",
+            "CONNECTED",
+            "NOT_READY",
+            "UNREGISTERED"
+          ]
+        },
+        "lastConnectionDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "uriScheme": {
+          "type": "string",
+          "enum": [
+            "HTTP",
+            "HTTPS"
+          ]
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "groupId": {
+          "type": "string"
+        },
+        "endDevicesCountByState": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "firmwareVersion": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      }
+    },
+    "AimsApiResponse": {
+      "type": "object",
+      "properties": {
+        "returnMsg": {
+          "type": "string"
+        },
+        "returnCode": {
+          "type": "string"
+        },
+        "customBatchId": {
+          "type": "string"
+        }
+      }
+    },
+    "AimsPortalArticleMessage": {
+      "required": [
+        "data",
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "stationCode": {
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        },
+        "id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 512,
+          "minLength": 1,
+          "type": "string"
+        },
+        "nfc": {
+          "maxLength": 240,
+          "minLength": 0,
+          "type": "string"
+        },
+        "originPrice": {
+          "type": "string",
+          "readOnly": true
+        },
+        "salePrice": {
+          "type": "string",
+          "readOnly": true
+        },
+        "discountPercent": {
+          "type": "string",
+          "readOnly": true
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "maxLength": 2147483647,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "modifiedDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "reservedOne": {
+          "type": "string",
+          "readOnly": true
+        },
+        "reservedTwo": {
+          "type": "string",
+          "readOnly": true
+        },
+        "reservedThree": {
+          "type": "string",
+          "readOnly": true
+        },
+        "eans": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      }
+    },
+    "AimsPortalArticleMessage_ArticeView": {
+      "required": [
+        "data",
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "stationCode": {
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        },
+        "id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 512,
+          "minLength": 1,
+          "type": "string"
+        },
+        "nfc": {
+          "maxLength": 240,
+          "minLength": 0,
+          "type": "string"
+        },
+        "originPrice": {
+          "type": "string",
+          "readOnly": true
+        },
+        "salePrice": {
+          "type": "string",
+          "readOnly": true
+        },
+        "discountPercent": {
+          "type": "string",
+          "readOnly": true
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "maxLength": 2147483647,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "modifiedDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "reservedOne": {
+          "type": "string",
+          "readOnly": true
+        },
+        "reservedTwo": {
+          "type": "string",
+          "readOnly": true
+        },
+        "reservedThree": {
+          "type": "string",
+          "readOnly": true
+        },
+        "eans": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      }
+    },
+    "AimsPortalArticleMessage_EndDeviceView": {
+      "required": [
+        "data",
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "stationCode": {
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        },
+        "id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 512,
+          "minLength": 1,
+          "type": "string"
+        },
+        "nfc": {
+          "maxLength": 240,
+          "minLength": 0,
+          "type": "string"
+        },
+        "originPrice": {
+          "type": "string",
+          "readOnly": true
+        },
+        "salePrice": {
+          "type": "string",
+          "readOnly": true
+        },
+        "discountPercent": {
+          "type": "string",
+          "readOnly": true
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "maxLength": 2147483647,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "modifiedDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "reservedOne": {
+          "type": "string",
+          "readOnly": true
+        },
+        "reservedTwo": {
+          "type": "string",
+          "readOnly": true
+        },
+        "reservedThree": {
+          "type": "string",
+          "readOnly": true
+        },
+        "eans": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      }
+    },
+    "AlarmStatusParameter": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
+          "type": "boolean"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "counter": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ArticleCompositePK": {
+      "type": "object",
+      "properties": {
+        "stationCode": {
+          "type": "string"
+        },
+        "articleId": {
+          "type": "string"
+        }
+      }
+    },
+    "ArticleMappingData": {
+      "required": [
+        "articleId",
+        "eans",
+        "stationCode"
+      ],
+      "type": "object",
+      "properties": {
+        "stationCode": {
+          "type": "string"
+        },
+        "articleId": {
+          "type": "string"
+        },
+        "eans": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ArticleMappingParam": {
+      "required": [
+        "mappingList"
+      ],
+      "type": "object",
+      "properties": {
+        "mappingList": {
+          "maxItems": 2147483647,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArticleMappingData"
+          }
+        }
+      }
+    },
+    "ArticleParam": {
+      "required": [
+        "dataList"
+      ],
+      "type": "object",
+      "properties": {
+        "customBatchId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "dataList": {
+          "maxItems": 2147483647,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AimsPortalArticleMessage"
+          }
+        }
+      }
+    },
+    "ArticleScheduleParam": {
+      "type": "object",
+      "properties": {
+        "customBatchId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "articleList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArticleCompositePK"
+          }
+        },
+        "scheduleList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagScheduleTime"
+          }
+        }
+      }
+    },
+    "ArticleScheduleResponse": {
+      "type": "object",
+      "properties": {
+        "article": {
+          "$ref": "#/definitions/ArticleCompositePK"
+        },
+        "zoneId": {
+          "type": "string"
+        },
+        "labelCodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scheduleList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagScheduleTime"
+          }
+        }
+      }
+    },
+    "AssignArticleRequestMessage": {
+      "required": [
+        "dataList",
+        "labelCode"
+      ],
+      "type": "object",
+      "properties": {
+        "customBatchId": {
+          "type": "string"
+        },
+        "labelCode": {
+          "maxLength": 18,
+          "minLength": 12,
+          "type": "string"
+        },
+        "dataList": {
+          "maxItems": 2147483647,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AimsPortalArticleMessage"
+          }
+        },
+        "templateName": {
+          "maxLength": 255,
+          "minLength": 1,
+          "type": "string"
+        },
+        "arrow": {
+          "type": "string"
+        },
+        "addInfo2": {
+          "type": "string"
+        },
+        "addInfo3": {
+          "type": "string"
+        },
+        "addInfo4": {
+          "type": "string"
+        },
+        "addInfo5": {
+          "type": "string"
+        },
+        "skipChecksumValidation": {
+          "type": "boolean"
+        }
+      }
+    },
+    "AssignMultipleRequestMessage": {
+      "required": [
+        "assignRequestList"
+      ],
+      "type": "object",
+      "properties": {
+        "customBatchId": {
+          "type": "string"
+        },
+        "assignRequestList": {
+          "maxItems": 2147483647,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssignRequest"
+          }
+        }
+      }
+    },
+    "AssignRequest": {
+      "required": [
+        "articleIdList",
+        "labelCode"
+      ],
+      "type": "object",
+      "properties": {
+        "labelCode": {
+          "type": "string"
+        },
+        "articleIdList": {
+          "maxItems": 2147483647,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "maxLength": 2147483647,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "templateName": {
+          "type": "string"
+        },
+        "arrow": {
+          "type": "string"
+        },
+        "addInfo2": {
+          "type": "string"
+        },
+        "addInfo3": {
+          "type": "string"
+        },
+        "addInfo4": {
+          "type": "string"
+        },
+        "addInfo5": {
+          "type": "string"
+        },
+        "skipChecksumValidation": {
+          "type": "boolean"
+        }
+      }
+    },
+    "AssignRequestMessage": {
+      "required": [
+        "articleIdList",
+        "labelCode"
+      ],
+      "type": "object",
+      "properties": {
+        "customBatchId": {
+          "type": "string"
+        },
+        "labelCode": {
+          "maxLength": 18,
+          "minLength": 12,
+          "type": "string"
+        },
+        "articleIdList": {
+          "maxItems": 2147483647,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "maxLength": 2147483647,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "templateName": {
+          "maxLength": 255,
+          "minLength": 1,
+          "type": "string"
+        },
+        "arrow": {
+          "type": "string"
+        },
+        "addInfo2": {
+          "type": "string"
+        },
+        "addInfo3": {
+          "type": "string"
+        },
+        "addInfo4": {
+          "type": "string"
+        },
+        "addInfo5": {
+          "type": "string"
+        },
+        "skipChecksumValidation": {
+          "type": "boolean"
+        },
+        "arrowDirection": {
+          "type": "string"
+        }
+      }
+    },
+    "BatteryStatus": {
+      "type": "object",
+      "properties": {
+        "goodBatteryTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "badBatteryTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "veryGoodBatteryTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "lowBatteryTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "replaceBatteryTagCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "BatteryStatus_StationView": {
+      "type": "object",
+      "properties": {
+        "goodBatteryTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "badBatteryTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "veryGoodBatteryTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "lowBatteryTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "replaceBatteryTagCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ButtonAlarmRsp": {
+      "type": "object",
+      "properties": {
+        "labelCode": {
+          "type": "string"
+        },
+        "alarmStatus": {
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "ButtonDetailAlarmRsp": {
+      "type": "object",
+      "properties": {
+        "labelCode": {
+          "type": "string"
+        },
+        "alarmStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlarmStatusParameter"
+          }
+        }
+      }
+    },
+    "ContentInfoParam_EndDeviceView": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "contentType": {
+          "type": "string",
+          "enum": [
+            "DEFAULT",
+            "IMAGE",
+            "SEGMENT",
+            "MULTI_SEGMENT",
+            "SCHEDULE",
+            "NFC",
+            "REPEATABLE_SCHEDULE"
+          ]
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "STALE",
+            "SUCCESS",
+            "PROCESSING",
+            "TIMEOUT"
+          ]
+        },
+        "statusUpdateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "processUpdateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "DEFAULT",
+            "IMAGE",
+            "SEGMENT",
+            "MULTI_SEGMENT",
+            "SCHEDULE",
+            "NFC",
+            "REPEATABLE_SCHEDULE"
+          ]
+        }
+      }
+    },
+    "ContentSegment": {
+      "type": "object",
+      "properties": {
+        "salePrice": {
+          "type": "string"
+        },
+        "unitPrice": {
+          "type": "string"
+        },
+        "unitPriceDimension": {
+          "type": "string",
+          "enum": [
+            "DIM_NOT",
+            "DIM_1",
+            "DIM_100"
+          ]
+        },
+        "unit": {
+          "type": "string",
+          "enum": [
+            "UNIT_NOT",
+            "UNIT_G",
+            "UNIT_KG",
+            "UNIT_ML",
+            "UNIT_L"
+          ]
+        },
+        "markerSalePriceDot": {
+          "type": "boolean"
+        },
+        "markerUnitPriceDot": {
+          "type": "boolean"
+        },
+        "markerEqual": {
+          "type": "boolean"
+        },
+        "markerCurrency": {
+          "type": "boolean"
+        },
+        "markerTriangle": {
+          "type": "boolean"
+        },
+        "markerSquare": {
+          "type": "boolean"
+        },
+        "markerCircle": {
+          "type": "boolean"
+        },
+        "markerA": {
+          "type": "boolean"
+        },
+        "markerR": {
+          "type": "boolean"
+        }
+      },
+      "readOnly": true
+    },
+    "ControlLedByArticleParam": {
+      "required": [
+        "articleId",
+        "color",
+        "duration",
+        "stationCode"
+      ],
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "string",
+          "enum": [
+            "RED",
+            "GREEN",
+            "YELLOW",
+            "BLUE",
+            "MAGENTA",
+            "CYAN",
+            "WHITE"
+          ]
+        },
+        "duration": {
+          "type": "string",
+          "enum": [
+            "0",
+            "10s",
+            "20s",
+            "30s",
+            "40s",
+            "50s",
+            "1m",
+            "70s",
+            "80s",
+            "90s",
+            "100s",
+            "110s",
+            "2m",
+            "130s",
+            "140s",
+            "150s",
+            "5m",
+            "10m",
+            "15m",
+            "20m",
+            "25m",
+            "30m",
+            "35m",
+            "40m",
+            "45m",
+            "50m",
+            "55m",
+            "60m",
+            "65m",
+            "70m",
+            "75m",
+            "0,10s,30s,1m,2m,5m,10m,15m,20m,30m,60m"
+          ]
+        },
+        "patternId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "stationCode": {
+          "type": "string"
+        },
+        "articleId": {
+          "type": "string"
+        }
+      }
+    },
+    "ControlLedParam": {
+      "required": [
+        "color",
+        "duration",
+        "labelCode"
+      ],
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "string",
+          "enum": [
+            "RED",
+            "GREEN",
+            "YELLOW",
+            "BLUE",
+            "MAGENTA",
+            "CYAN",
+            "WHITE"
+          ]
+        },
+        "duration": {
+          "type": "string",
+          "enum": [
+            "0",
+            "10s",
+            "20s",
+            "30s",
+            "40s",
+            "50s",
+            "1m",
+            "70s",
+            "80s",
+            "90s",
+            "100s",
+            "110s",
+            "2m",
+            "130s",
+            "140s",
+            "150s",
+            "5m",
+            "10m",
+            "15m",
+            "20m",
+            "25m",
+            "30m",
+            "35m",
+            "40m",
+            "45m",
+            "50m",
+            "55m",
+            "60m",
+            "65m",
+            "70m",
+            "75m",
+            "0,10s,30s,1m,2m,5m,10m,15m,20m,30m,60m"
+          ]
+        },
+        "patternId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "labelCode": {
+          "maxLength": 2147483647,
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    },
+    "ControlLedforMultipleParam": {
+      "required": [
+        "color",
+        "duration",
+        "labelCodes"
+      ],
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "string",
+          "enum": [
+            "RED",
+            "GREEN",
+            "YELLOW",
+            "BLUE",
+            "MAGENTA",
+            "CYAN",
+            "WHITE"
+          ]
+        },
+        "duration": {
+          "type": "string",
+          "enum": [
+            "0",
+            "10s",
+            "20s",
+            "30s",
+            "40s",
+            "50s",
+            "1m",
+            "70s",
+            "80s",
+            "90s",
+            "100s",
+            "110s",
+            "2m",
+            "130s",
+            "140s",
+            "150s",
+            "5m",
+            "10m",
+            "15m",
+            "20m",
+            "25m",
+            "30m",
+            "35m",
+            "40m",
+            "45m",
+            "50m",
+            "55m",
+            "60m",
+            "65m",
+            "70m",
+            "75m",
+            "0,10s,30s,1m,2m,5m,10m,15m,20m,30m,60m"
+          ]
+        },
+        "patternId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "labelCodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EPaperParam_EndDeviceView": {
+      "type": "object",
+      "properties": {
+        "stationCode": {
+          "type": "string"
+        },
+        "labelCode": {
+          "type": "string"
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "macAddress": {
+          "type": "string"
+        },
+        "groupId": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "statusUpdateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "PROCESSING",
+            "SUCCESS",
+            "TIMEOUT",
+            "UNASSIGNING",
+            "UNASSIGNED"
+          ]
+        },
+        "messageType": {
+          "type": "string",
+          "enum": [
+            "UNASSIGN",
+            "ASSIGN",
+            "DELETE"
+          ]
+        },
+        "displayPage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "nfcData": {
+          "type": "string"
+        },
+        "accessPoint": {
+          "$ref": "#/definitions/AccessPointParam_EndDeviceView"
+        },
+        "contents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentInfoParam_EndDeviceView"
+          }
+        },
+        "usedPage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "buttons": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SLabelButton_EndDeviceView"
+          }
+        },
+        "pickingStatus": {
+          "$ref": "#/definitions/SLabelPickingStatus_EndDeviceView"
+        },
+        "arrow": {
+          "type": "string"
+        },
+        "addInfo2": {
+          "type": "string"
+        },
+        "addInfo3": {
+          "type": "string"
+        },
+        "addInfo4": {
+          "type": "string"
+        },
+        "addInfo5": {
+          "type": "string"
+        },
+        "processUpdateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "articleList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AimsPortalArticleMessage_EndDeviceView"
+          }
+        },
+        "templateName": {
+          "type": "string"
+        },
+        "templateType": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "code": {
+          "type": "string"
+        },
+        "currentPage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sLabelType": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "sLabelStatus": {
+          "$ref": "#/definitions/EPaperTagStatusParam_EndDeviceView"
+        }
+      }
+    },
+    "EPaperTagStatusParam_EndDeviceView": {
+      "type": "object",
+      "properties": {
+        "firmwareVersion": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "battery": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "REPLACE",
+            "LOW",
+            "BAD",
+            "GOOD",
+            "VERYGOOD"
+          ]
+        },
+        "batteryLevel": {
+          "type": "string"
+        },
+        "signalStrength": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "BAD",
+            "GOOD",
+            "EXCELLENT"
+          ]
+        },
+        "updateStatus": {
+          "type": "string",
+          "enum": [
+            "JSON_ARRAYSIZE_MISMATCH",
+            "NONE",
+            "FAIL",
+            "ACTIVATION_FAIL_0",
+            "SUCCESS",
+            "ACTIVATION_SUCCESS_2",
+            "RESULT_3",
+            "RESULT_4",
+            "ACTIVATION_SUCCESS_5",
+            "ACTIVATION_FAIL_6",
+            "ACTIVATION_SUCCESS_7",
+            "BUTTON_REPORT",
+            "ALIVE_REPORT",
+            "RESULT_10",
+            "PACKET_TX_SUCCESS",
+            "PACKET_TX_FAIL",
+            "RESULT_13",
+            "RESULT_14",
+            "RESULT_15",
+            "RESULT_16",
+            "RESULT_17",
+            "ENDDEVICE_TIMEOUT",
+            "RESULT_19",
+            "RESULT_20",
+            "PARTIAL_PACKET_FAIL",
+            "RESULT_22",
+            "RESULT_23",
+            "INVALID_PAGE_COUNT",
+            "INVALID_CRC",
+            "RESULT_26",
+            "EPD_DISP_FAIL",
+            "RESULT_28",
+            "PACKET_SIZE_OVERFLOW",
+            "HDR_FAIL",
+            "RESULT_31",
+            "RESULT_32",
+            "RESULT_33",
+            "RESULT_34",
+            "RESULT_35",
+            "DECOMPRESSION_FAIL",
+            "RESULT_37",
+            "RESULT_38",
+            "NFC_WRITE_FAIL",
+            "INVALID_IMG_SIZE",
+            "RESULT_41",
+            "RESULT_42",
+            "RESULT_43",
+            "RESULT_44",
+            "INVALID_BITS_DEPTH",
+            "INVALID_LABEL_TYPE",
+            "RESULT_47",
+            "RESULT_48",
+            "RESULT_49",
+            "RESULT_50",
+            "RESULT_51",
+            "EPD_PANEL_CRACK",
+            "RESULT_53",
+            "RESULT_54",
+            "RESULT_55"
+          ]
+        },
+        "aliveStatus": {
+          "type": "string",
+          "enum": [
+            "ONLINE",
+            "OFFLINE"
+          ]
+        },
+        "temperature": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "dataChannelRssi": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "EPaperTagStatusSummaryParam": {
+      "type": "object",
+      "properties": {
+        "totalTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "batteryStatus": {
+          "$ref": "#/definitions/BatteryStatus"
+        },
+        "signalStrength": {
+          "$ref": "#/definitions/SignalStrength"
+        }
+      }
+    },
+    "EPaperTagStatusSummaryParam_StationView": {
+      "type": "object",
+      "properties": {
+        "totalTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
+          "$ref": "#/definitions/Status_StationView"
+        },
+        "batteryStatus": {
+          "$ref": "#/definitions/BatteryStatus_StationView"
+        },
+        "signalStrength": {
+          "$ref": "#/definitions/SignalStrength_StationView"
+        }
+      }
+    },
+    "LedPattern": {
+      "required": [
+        "activeCount",
+        "activeTime",
+        "id",
+        "idleTime",
+        "inActiveTime",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "minimum": 1,
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        },
+        "activeTime": {
+          "maximum": 2550,
+          "minimum": 10,
+          "type": "integer",
+          "format": "int32"
+        },
+        "inActiveTime": {
+          "maximum": 2550,
+          "minimum": 10,
+          "type": "integer",
+          "format": "int32"
+        },
+        "idleTime": {
+          "maximum": 255,
+          "minimum": 1,
+          "type": "integer",
+          "format": "int32"
+        },
+        "activeCount": {
+          "maximum": 255,
+          "minimum": 1,
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "NDeviceParam_StationView": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1
+        },
+        "batteryMode": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "aliveInterval": {
+          "type": "integer",
+          "format": "int32",
+          "example": 24
+        },
+        "aesEnable": {
+          "type": "boolean",
+          "example": false
+        },
+        "acsEnable": {
+          "type": "boolean",
+          "example": false
+        },
+        "lostTime": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "logoDisplayTime": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "beaconLossLimit": {
+          "type": "integer",
+          "format": "int32",
+          "example": 10
+        },
+        "reactivationRetryLimit": {
+          "type": "integer",
+          "format": "int32",
+          "example": 2
+        },
+        "scanPeriodSet": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "tapGoStartTime": {
+          "type": "integer",
+          "format": "int32",
+          "example": 9
+        },
+        "tapGoEndTime": {
+          "type": "integer",
+          "format": "int32",
+          "example": 21
+        },
+        "flexibleDefault": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1
+        },
+        "updatePageUnlock": {
+          "type": "boolean",
+          "example": false
+        },
+        "noiseCheckTime": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1
+        },
+        "noiseThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1
+        },
+        "statusPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "example": 5
+        },
+        "statusCount": {
+          "type": "integer",
+          "format": "int32",
+          "example": 12
+        },
+        "limitStatus": {
+          "type": "integer",
+          "format": "int32",
+          "example": 200
+        },
+        "pageBackTime": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "chAlive": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "chLbs": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "NDeviceParam_StationViewDashbaord": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1
+        },
+        "batteryMode": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "aliveInterval": {
+          "type": "integer",
+          "format": "int32",
+          "example": 24
+        },
+        "aesEnable": {
+          "type": "boolean",
+          "example": false
+        },
+        "acsEnable": {
+          "type": "boolean",
+          "example": false
+        },
+        "lostTime": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "logoDisplayTime": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "beaconLossLimit": {
+          "type": "integer",
+          "format": "int32",
+          "example": 10
+        },
+        "reactivationRetryLimit": {
+          "type": "integer",
+          "format": "int32",
+          "example": 2
+        },
+        "scanPeriodSet": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "tapGoStartTime": {
+          "type": "integer",
+          "format": "int32",
+          "example": 9
+        },
+        "tapGoEndTime": {
+          "type": "integer",
+          "format": "int32",
+          "example": 21
+        },
+        "flexibleDefault": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1
+        },
+        "updatePageUnlock": {
+          "type": "boolean",
+          "example": false
+        },
+        "noiseCheckTime": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1
+        },
+        "noiseThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1
+        },
+        "statusPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "example": 5
+        },
+        "statusCount": {
+          "type": "integer",
+          "format": "int32",
+          "example": 12
+        },
+        "limitStatus": {
+          "type": "integer",
+          "format": "int32",
+          "example": 200
+        },
+        "pageBackTime": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "chAlive": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "chLbs": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "PickingArticleRes_PickingView": {
+      "type": "object",
+      "properties": {
+        "productName": {
+          "type": "string"
+        },
+        "productCode": {
+          "type": "string"
+        }
+      }
+    },
+    "PickingRes_PickingView": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "pickingLinkStatus": {
+          "type": "string"
+        },
+        "ledColor": {
+          "type": "string"
+        },
+        "requestPickingDate": {
+          "type": "string"
+        },
+        "pickingDate": {
+          "type": "string"
+        },
+        "articles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PickingArticleRes_PickingView"
+          }
+        }
+      }
+    },
+    "PortalSLabelType": {
+      "type": "object",
+      "properties": {
+        "labelCode": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "displayWidth": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "displayHeight": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalPage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "colorType": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "BINARY",
+            "TERNARY_RED",
+            "TERNARY_YELLOW",
+            "BIT2_4C",
+            "BIT4_5C",
+            "BIT4_7C"
+          ]
+        },
+        "resolution": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "nfc": {
+          "type": "boolean"
+        },
+        "templateColor": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "NONE",
+              "BLACK",
+              "GREEN",
+              "ORANGE",
+              "BLUE",
+              "RED",
+              "WHITE",
+              "YELLOW"
+            ]
+          }
+        },
+        "realTime": {
+          "type": "boolean"
+        },
+        "led": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ReturnResponse": {
+      "type": "object",
+      "properties": {
+        "returnMsg": {
+          "type": "string"
+        },
+        "returnCode": {
+          "type": "string"
+        },
+        "contentData": {
+          "type": "string"
+        },
+        "contentLength": {
+          "type": "string"
+        },
+        "contentType": {
+          "type": "string"
+        },
+        "previewImage": {
+          "type": "string"
+        }
+      }
+    },
+    "SGatewayConfig_AccessPointView": {
+      "type": "object",
+      "properties": {
+        "machId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ipTimeServer": {
+          "type": "string"
+        },
+        "chData": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "chWakeup": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "refreshStart": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "flexibleDefault": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "wakeupOrder": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "chScan": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "phyMode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "chBeacon": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "integMachId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "segConfig": {
+          "type": "boolean"
+        },
+        "segNum": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SGatewayState_AccessPointView": {
+      "type": "object",
+      "properties": {
+        "ntp": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tml": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SLabelButton_EndDeviceView": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "DISABLED",
+            "LED_OFF",
+            "ALARM",
+            "CLEAR",
+            "LEFT_PAGE_BACK",
+            "RIGHT_PAGE_BACK",
+            "LEFT_PAGE",
+            "RIGHT_PAGE",
+            "SYNCLOSS_ALARM_1",
+            "PICKING_REPORT",
+            "CHANGEABLE_LEFT_PAGE",
+            "CHANGEABLE_RIGHT_PAGE"
+          ]
+        },
+        "alarmStatus": {
+          "type": "string",
+          "enum": [
+            "ON",
+            "OFF"
+          ]
+        },
+        "alarmOnDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "counter": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SLabelPickingStatus_EndDeviceView": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "pickingLinkStatus": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "BLINK_FAIL",
+            "BLINK_SUCCESS",
+            "PICKING"
+          ]
+        },
+        "ledColor": {
+          "type": "string",
+          "enum": [
+            "RED",
+            "GREEN",
+            "BLUE",
+            "YELLOW",
+            "CYAN",
+            "MAGENTA",
+            "WHITE"
+          ]
+        },
+        "requestPickingDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "pickingDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "SegmentContentParam": {
+      "type": "object",
+      "properties": {
+        "salePrice": {
+          "type": "string"
+        },
+        "unitPrice": {
+          "type": "string"
+        },
+        "unitPriceDimension": {
+          "type": "string",
+          "enum": [
+            "DIM_NOT",
+            "DIM_1",
+            "DIM_100"
+          ]
+        },
+        "unit": {
+          "type": "string",
+          "enum": [
+            "UNIT_NOT",
+            "UNIT_G",
+            "UNIT_KG",
+            "UNIT_ML",
+            "UNIT_L"
+          ]
+        },
+        "markerTriangle": {
+          "type": "boolean"
+        },
+        "markerSquare": {
+          "type": "boolean"
+        },
+        "markerCircle": {
+          "type": "boolean"
+        },
+        "markerA": {
+          "type": "boolean"
+        },
+        "markerR": {
+          "type": "boolean"
+        }
+      },
+      "description": "Enter marker information for PreviewImage creation"
+    },
+    "SignalStrength": {
+      "type": "object",
+      "properties": {
+        "excellentSignalTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "goodSignalTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "badSignalTagCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SignalStrength_StationView": {
+      "type": "object",
+      "properties": {
+        "excellentSignalTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "goodSignalTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "badSignalTagCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "StationParam_AccessPointView": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "zoneId": {
+          "type": "string"
+        },
+        "ipNtpServer": {
+          "type": "string"
+        },
+        "whiteListEnabled": {
+          "type": "boolean"
+        },
+        "stationConfig": {
+          "type": "string"
+        }
+      }
+    },
+    "StationParam_StationView": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "zoneId": {
+          "type": "string"
+        },
+        "ipNtpServer": {
+          "type": "string"
+        },
+        "accessPoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessPointParam_StationView"
+          }
+        },
+        "summaryOfLabels": {
+          "$ref": "#/definitions/EPaperTagStatusSummaryParam_StationView"
+        },
+        "whiteListEnable": {
+          "type": "string"
+        },
+        "whiteListEnabled": {
+          "type": "boolean"
+        },
+        "lbsEnabled": {
+          "type": "boolean"
+        },
+        "divisionCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "whiteList": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StationWhiteListElement_StationView"
+          }
+        },
+        "whiteListUpdateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "whiteListFetchType": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "NOT_READY",
+            "FULL",
+            "ADD",
+            "DELETE"
+          ]
+        },
+        "stationConfig": {
+          "type": "string"
+        },
+        "company": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "newtonConfig": {
+          "$ref": "#/definitions/NDeviceParam_StationView"
+        }
+      }
+    },
+    "StationParam_StationViewDashbaord": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "zoneId": {
+          "type": "string"
+        },
+        "ipNtpServer": {
+          "type": "string"
+        },
+        "whiteListEnable": {
+          "type": "string"
+        },
+        "whiteListEnabled": {
+          "type": "boolean"
+        },
+        "lbsEnabled": {
+          "type": "boolean"
+        },
+        "divisionCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "whiteList": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StationWhiteListElement_StationViewDashbaord"
+          }
+        },
+        "whiteListUpdateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "whiteListFetchType": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "NOT_READY",
+            "FULL",
+            "ADD",
+            "DELETE"
+          ]
+        },
+        "countOfAccesspoint": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "countOfEnddevice": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "stationConfig": {
+          "type": "string"
+        },
+        "company": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "newtonConfig": {
+          "$ref": "#/definitions/NDeviceParam_StationViewDashbaord"
+        }
+      }
+    },
+    "StationWhiteListElement_StationView": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "mac": {
+          "type": "string"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "addTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "StationWhiteListElement_StationViewDashbaord": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "mac": {
+          "type": "string"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "addTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "StationWhiteListParam_WhistListView": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "mac": {
+          "type": "string"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Status": {
+      "type": "object",
+      "properties": {
+        "successfulTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "processingTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "timeoutTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "unassignedTagCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Status_StationView": {
+      "type": "object",
+      "properties": {
+        "successfulTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "processingTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "timeoutTagCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "unassignedTagCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "TagRepeatScheduleRetrieveParam": {
+      "type": "object",
+      "properties": {
+        "zoneId": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "STALE",
+            "SUCCESS",
+            "PROCESSING",
+            "TIMEOUT"
+          ]
+        },
+        "repeatScheduleList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagRepeatScheduleTime"
+          }
+        }
+      }
+    },
+    "TagRepeatScheduleTime": {
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "example": "2023-01-15"
+        },
+        "repeatDay": {
+          "type": "string",
+          "enum": [
+            "MON",
+            "TUE",
+            "WED",
+            "THU",
+            "FRI",
+            "SAT",
+            "SUN"
+          ]
+        },
+        "applyTime": {
+          "type": "string",
+          "example": "09:00 ~ 18:00"
+        },
+        "displayPage": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "enum": [
+            null
+          ]
+        }
+      }
+    },
+    "TagScheduleData": {
+      "type": "object",
+      "properties": {
+        "labelCodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "repeatScheduleList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagRepeatScheduleTime"
+          }
+        },
+        "scheduleList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagScheduleTime"
+          }
+        },
+        "scheduleString": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TagScheduleParam": {
+      "type": "object",
+      "properties": {
+        "customBatchId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "allTag": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "stationCode": {
+          "type": "string"
+        },
+        "scheduleData": {
+          "$ref": "#/definitions/TagScheduleData"
+        },
+        "repeat": {
+          "type": "boolean"
+        }
+      },
+      "description": "Schedule object that include target tag list and page flipping repeat schedule"
+    },
+    "TagScheduleRetrieveParam": {
+      "type": "object",
+      "properties": {
+        "zoneId": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "STALE",
+            "SUCCESS",
+            "PROCESSING",
+            "TIMEOUT"
+          ]
+        },
+        "scheduleList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagScheduleTime"
+          }
+        }
+      }
+    },
+    "TagScheduleTime": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "example": "1980-01-15 00:00:00"
+        },
+        "endTime": {
+          "type": "string",
+          "example": "1980-01-15 23:59:59"
+        },
+        "displayPage": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "enum": [
+            null
+          ]
+        },
+        "ledColor": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "OFF",
+            "BLUE",
+            "GREEN",
+            "GREEN_BLUE",
+            "RED",
+            "RED_BLUE",
+            "RED_GREEN",
+            "RED_GREEN_BLUE"
+          ]
+        }
+      }
+    },
+    "TapAndGoInfoPostRequestParam": {
+      "type": "object",
+      "properties": {
+        "tapGoStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TapGoStatus"
+          }
+        },
+        "key": {
+          "type": "string"
+        },
+        "gwIp": {
+          "type": "string"
+        },
+        "gwMac": {
+          "type": "string"
+        }
+      }
+    },
+    "TapGoStatus": {
+      "type": "object",
+      "properties": {
+        "mac": {
+          "type": "string"
+        },
+        "labelCode": {
+          "type": "string"
+        },
+        "status": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "UpdateDisplayPage": {
+      "type": "object",
+      "properties": {
+        "customBatchId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/displayPages"
+          }
+        }
+      },
+      "description": "Label object that include page index to be displayed"
+    },
+    "UpdateImage": {
+      "type": "object",
+      "properties": {
+        "customBatchId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateImageLabel"
+          }
+        }
+      },
+      "description": "Image object that include image data and related information"
+    },
+    "UpdateImageLabel": {
+      "type": "object",
+      "properties": {
+        "labelCode": {
+          "type": "string"
+        },
+        "frontPage": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "enum": [
+            null
+          ]
+        },
+        "nfcUrl": {
+          "type": "string",
+          "readOnly": true
+        },
+        "buttons": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "readOnly": true
+          },
+          "readOnly": true
+        },
+        "scanPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "activationRetryPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "scanRetryCount": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "connectThreshMode": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "isHibernate": {
+          "type": "boolean"
+        },
+        "isScanDirect": {
+          "type": "boolean"
+        },
+        "contents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/contents"
+          }
+        },
+        "articleList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/articleList"
+          }
+        },
+        "hibernate": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "scanDirect": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "UpdateNfcUrl": {
+      "type": "object",
+      "properties": {
+        "customBatchId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/nfcLabels"
+          }
+        }
+      },
+      "description": "Label object that include NFC URL data and related information"
+    },
+    "articleList": {
+      "type": "object",
+      "properties": {
+        "articleId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "contents": {
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": "string",
+          "example": "IMAGE",
+          "enum": [
+            "DEFAULT",
+            "IMAGE",
+            "SEGMENT",
+            "MULTI_SEGMENT",
+            "SCHEDULE",
+            "NFC",
+            "REPEATABLE_SCHEDULE",
+            "SEGMENT, IMAGE"
+          ]
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "imgUrl": {
+          "type": "string"
+        },
+        "imgBase64": {
+          "type": "string"
+        },
+        "pageIndex": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "enum": [
+            null
+          ]
+        },
+        "segmentParam": {
+          "$ref": "#/definitions/ContentSegment"
+        },
+        "skipChecksumValidation": {
+          "type": "boolean"
+        }
+      },
+      "readOnly": true
+    },
+    "displayPages": {
+      "type": "object",
+      "properties": {
+        "labelCode": {
+          "type": "string"
+        },
+        "displayPage": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "enum": [
+            null
+          ]
+        }
+      }
+    },
+    "nfcLabels": {
+      "type": "object",
+      "properties": {
+        "labelCode": {
+          "type": "string"
+        },
+        "nfcUrl": {
+          "type": "string"
+        },
+        "content": {
+          "$ref": "#/definitions/contents"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api-key": {
+      "type": "apiKey",
+      "description": "api key for authentication of request",
+      "name": "api-key",
+      "in": "header"
+    }
+  },
+  "x-components": {
+    "parameters": {
+      "api-key": {
+        "name": "api-key",
+        "in": "header",
+        "schema": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
